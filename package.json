@@ -1,7 +1,7 @@
 {
   "name": "react-redux-by-rem-zolotykh",
   "version": "1.0.0",
-  "description": "Following the video tutorial React & Redux by Rem Zolotykh ()\u001b[Dhttps://www.youtube.com/user/MrRemchi)",
+  "description": "Following the video tutorial React & Redux by Rem Zolotykh (https://www.youtube.com/user/MrRemchi)",
   "main": "index.js",
   "scripts": {
     "server": "nodemon --watch server --exec babel-node -- server/index.js",
@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "express": "^4.14.0",
+    "history": "^4.5.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-router": "^4.0.0-alpha.6"
