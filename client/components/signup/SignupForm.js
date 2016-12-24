@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import timezones from '../../data/timezones';
+import TextFieldGroup from '../common/TextFieldGroup';
+import validateInput from '../../../shared/validations/signup';
 
 class SignupForm extends React.Component {
   constructor() {
@@ -21,19 +23,23 @@ class SignupForm extends React.Component {
   onChange(e) {
     this.setState({[e.target.name]: e.target.value})
   }
+  isValid() {
+    const { errors, isValid } = validateInput(this.state);
+
+    if(!isValid) {
+      this.setState({ errors });
+    }
+    return isValid;
+  }
   onSubmit(e) {
     e.preventDefault();
-    this.setState({ errors: {}, isLoading: true });
-    this.props.userSignupRequest(this.state).then(
-      () => {},
-      ({ data }) => this.setState({ errors: data, isLoading: false })
-    );
-  }
-  renderError(field) {
-    return field && <span className="help-block">{field}</span>;
-  }
-  renderErrorClass(field) {
-    return classnames("form-group", { "has-error": field });
+    if(this.isValid()) {
+      this.setState({ errors: {}, isLoading: true });
+      this.props.userSignupRequest(this.state).then(
+        () => {},
+        ({ data }) => this.setState({ errors: data, isLoading: false })
+      );
+    }
   }
   render () {
     const errors = this.state.errors;
@@ -43,51 +49,36 @@ class SignupForm extends React.Component {
     return (
       <form onSubmit={this.onSubmit}>
         <h1>Join our community!</h1>
-        <div className={this.renderErrorClass(errors.username)}>
-          <label className="control-label">Username</label>
-          <input
-            value={this.state.username}
-            type="text"
-            name="username"
-            className="form-control"
-            onChange={this.onChange}
-          />
-        {this.renderError(errors.username)}
-        </div>
-        <div className={this.renderErrorClass(errors.email)}>
-          <label className="control-label">Email</label>
-          <input
-            value={this.state.email}
-            type="email"
-            name="email"
-            className="form-control"
-            onChange={this.onChange}
-          />
-          {this.renderError(errors.email)}
-        </div>
-        <div className={this.renderErrorClass(errors.password)}>
-          <label className="control-label">Password</label>
-          <input
-            value={this.state.password}
-            type="password"
-            name="password"
-            className="form-control"
-            onChange={this.onChange}
-          />
-          {this.renderError(errors.password)}
-        </div>
-        <div className={this.renderErrorClass(errors.passwordConfirmation)}>
-          <label className="control-label">Confirm Password</label>
-          <input
-            value={this.state.passwordConfirmation}
-            type="password"
-            name="passwordConfirmation"
-            className="form-control"
-            onChange={this.onChange}
-          />
-          {this.renderError(errors.passwordConfirmation)}
-        </div>
-        <div className={this.renderErrorClass(errors.timezone)}>
+
+        <TextFieldGroup
+          field="username"
+          value={this.state.username}
+          label="Username"
+          error={errors.username}
+          onChange={this.onChange}
+        />
+        <TextFieldGroup
+          field="email"
+          value={this.state.email}
+          label="Email"
+          error={errors.email}
+          onChange={this.onChange}
+        />
+        <TextFieldGroup
+          field="password"
+          value={this.state.password}
+          label="Password"
+          error={errors.password}
+          onChange={this.onChange}
+        />
+        <TextFieldGroup
+          field="passwordConfirmation"
+          value={this.state.passwordConfirmation}
+          label="Password Confirmation"
+          error={errors.passwordConfirmation}
+          onChange={this.onChange}
+        />
+        <div className={ classnames("form-group", { "has-error": errors.timezone }) }>
           <label className="control-label">Timezone</label>
           <select
             className="form-control"
@@ -98,7 +89,7 @@ class SignupForm extends React.Component {
             <option value="" disabled>Choose Your Timezone</option>
             {options}
           </select>
-          {this.renderError(errors.timezone)}
+          {errors.timezone && <span className="help-block">{errors.timezone}</span>}
         </div>
         <div className="form-group">
           <button disabled={this.state.isLoading} className="btn btn-primary btn-lg">
