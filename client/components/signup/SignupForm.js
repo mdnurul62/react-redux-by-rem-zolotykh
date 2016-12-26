@@ -38,7 +38,13 @@ class SignupForm extends React.Component {
     if(this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
       this.props.userSignupRequest(this.state).then(
-        () => this.setState({ isLogged: true })
+        () => {
+          this.props.addFlashMessage({
+            type: 'success',
+            text: 'You signed up successfully. Welcome!'
+          });
+          this.setState({ isLogged: true });
+        }
         ,
         ({ data }) => this.setState({ errors: data, isLoading: false })
       );
@@ -75,6 +81,7 @@ class SignupForm extends React.Component {
               label="Password"
               error={errors.password}
               onChange={this.onChange}
+              type="password"
             />
             <TextFieldGroup
               field="passwordConfirmation"
@@ -82,6 +89,7 @@ class SignupForm extends React.Component {
               label="Password Confirmation"
               error={errors.passwordConfirmation}
               onChange={this.onChange}
+              type="password"
             />
             <div className={ classnames("form-group", { "has-error": errors.timezone }) }>
               <label className="control-label">Timezone</label>
@@ -109,7 +117,8 @@ class SignupForm extends React.Component {
 }
 
 SignupForm.propTypes = {
-  userSignupRequest: React.PropTypes.func.isRequired
+  userSignupRequest: React.PropTypes.func.isRequired,
+  addFlashMessage: React.PropTypes.func.isRequired
 }
 
 export default SignupForm;
