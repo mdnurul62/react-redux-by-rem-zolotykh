@@ -1,14 +1,16 @@
 import React, { PropTypes } from 'react';
 import FlashMessage from './FlashMessage';
 
-const FlashMessageList = ({ messages }) => (
+const FlashMessageList = ({ messages, removeFlashMessage }) => (
   <div>
     {
-      messages.map(message =>
+      Object.keys(messages).map(id =>
         <FlashMessage
-          key={message.id}
-          {...message}
-        />)
+          key={id}
+          {...messages[id]}
+          onClose={() => removeFlashMessage(id) }
+        />
+      )
     }
   </div>
 );

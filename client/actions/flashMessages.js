@@ -1,5 +1,5 @@
 import shortid from 'shortid';
-import { ADD_FLASH_MESSAGE } from '../actionTypes';
+import { ADD_FLASH_MESSAGE, REMOVE_FLASH_MESSAGE } from '../actionTypes';
 
 export const addFlashMessage = (message) => {
   return {
@@ -8,5 +8,12 @@ export const addFlashMessage = (message) => {
       id: shortid.generate(),
       ...message
     }
+  }
+}
+
+export const removeFlashMessage = (id) => {
+  return {
+    type: REMOVE_FLASH_MESSAGE,
+    id
   }
 }

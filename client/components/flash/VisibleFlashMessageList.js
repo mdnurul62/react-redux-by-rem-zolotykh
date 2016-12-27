@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import FlashMessageList from './FlashMessageList';
+import { removeFlashMessage } from '../../actions/flashMessages';
 
 const mapStateToProps = (state) => {
   return {
@@ -8,7 +9,8 @@ const mapStateToProps = (state) => {
 }
 
 const VisibleFlashMessageList = connect(
-  mapStateToProps
+  mapStateToProps,
+  { removeFlashMessage }
 )(FlashMessageList);
 
 export default VisibleFlashMessageList;
