@@ -12,13 +12,8 @@ const flashMessages = (state = {}, action = {}) => {
         }
       }
     case REMOVE_FLASH_MESSAGE:
-      return {
-        
-      }
-
-      Object.keys(state)
-        .filter(id => id !== action.id)
-        .map(id => state[id]);
+      const { [action.id]:message, ...newState } = state;
+      return newState;
     default:
       return state;
   }
