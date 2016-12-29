@@ -1,4 +1,4 @@
-import bookshelf from '../boookshelf';
+import bookshelf from '../bookshelf';
 
 export default bookshelf.Model.extend({
   tableName: 'users'

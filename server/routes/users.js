@@ -1,5 +1,5 @@
 import express from 'express';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt-nodejs';
 import validateInput from '../../shared/validations/signup';
 import User from '../models/user';
 
@@ -10,14 +10,13 @@ router.post('/', (req, res) => {
 
   if(isValid) {
     const { username, password, timezone, email } = req.body;
-    const password_digest = bcrypt.hashSync(password, 10);
+    const password_digest = bcrypt.hashSync(password);
 
     User.forge({
       username, timezone, email, password_digest
     }, { hasTimestamps: true }).save()
       .then(user => res.json({ success: true }))
       .catch(error => res.status(500).json({ error }));
-    res.json({ success: true });
   } else {
     res.status(400).json(errors);
   }
