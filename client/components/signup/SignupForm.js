@@ -21,6 +21,7 @@ class SignupForm extends React.Component {
     }
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.checkUserExists = this.checkUserExists.bind(this);
   }
   onChange(e) {
     this.setState({[e.target.name]: e.target.value})
@@ -50,6 +51,9 @@ class SignupForm extends React.Component {
       );
     }
   }
+  checkUserExists(e) {
+
+  }
   render () {
     const errors = this.state.errors;
     const options = Object.keys(timezones).map(
@@ -67,6 +71,7 @@ class SignupForm extends React.Component {
               label="Username"
               error={errors.username}
               onChange={this.onChange}
+              onBlur={this.checkUserExists}
             />
             <TextFieldGroup
               field="email"
@@ -74,6 +79,7 @@ class SignupForm extends React.Component {
               label="Email"
               error={errors.email}
               onChange={this.onChange}
+              onBlur={this.checkUserExists}
             />
             <TextFieldGroup
               field="password"
