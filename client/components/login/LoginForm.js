@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import TextFieldGroup from '../common/TextFieldGroup';
 import validateInput from '../../../shared/validations/login';
-import { login } from '../../actions/login';
+import { login } from '../../actions/auth';
 
 class LoginForm extends React.Component {
   constructor(props) {
