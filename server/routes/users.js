@@ -46,4 +46,13 @@ router.post('/', (req, res) => {
   });
 });
 
+router.get('/:identifier', (req, res) => {
+  const identifier = req.params.identifier;
+  User.query({
+    select: ['username', 'email'],
+    where: { email: identifier },
+    orWhere: { username: identifier }
+  }).fetch().then(user => res.json({ user }));
+});
+
 export default router;

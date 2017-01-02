@@ -1,13 +1,16 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import { Redirect } from 'react-router';
+import { connect } from 'react-redux';
+import { userSignupRequest, isUserExists } from '../../actions/signupActions';
+import { addFlashMessage } from '../../actions/flashMessages';
 import timezones from '../../data/timezones';
 import TextFieldGroup from '../common/TextFieldGroup';
 import validateInput from '../../../shared/validations/signup';
 
 class SignupForm extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       username: '',
@@ -17,7 +20,8 @@ class SignupForm extends React.Component {
       timezone: '',
       errors: {},
       isLoading: false,
-      isLogged: false
+      isLogged: false,
+      invalid: false
     }
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -52,7 +56,21 @@ class SignupForm extends React.Component {
     }
   }
   checkUserExists(e) {
-
+    const { name, value } = e.target;
+    if(value) {
+      this.props.isUserExists(value).then(res => {
+        const errors = {...this.state.errors};
+        let invalid = false;
+        if(res.data.user) {
+          errors[name] = `There is a user with such ${name}`;
+          invalid = true;
+        } else {
+          errors[name] = '';
+          invalid = false;
+        }
+        this.setState({ errors, invalid });
+      });
+    }
   }
   render () {
     const errors = this.state.errors;
@@ -111,7 +129,7 @@ class SignupForm extends React.Component {
               {errors.timezone && <span className="help-block">{errors.timezone}</span>}
             </div>
             <div className="form-group">
-              <button disabled={this.state.isLoading} className="btn btn-primary btn-lg">
+              <button disabled={this.state.isLoading || this.state.invalid} className="btn btn-primary btn-lg">
                 Sign up
               </button>
             </div>
@@ -124,7 +142,10 @@ class SignupForm extends React.Component {
 
 SignupForm.propTypes = {
   userSignupRequest: React.PropTypes.func.isRequired,
-  addFlashMessage: React.PropTypes.func.isRequired
+  addFlashMessage: React.PropTypes.func.isRequired,
+  isUserExists: React.PropTypes.func.isRequired
 }
 
-export default SignupForm;
+export default connect(null,
+  { userSignupRequest, addFlashMessage, isUserExists })
+  (SignupForm);
