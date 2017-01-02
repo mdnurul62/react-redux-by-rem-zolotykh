@@ -20,7 +20,7 @@ class SignupForm extends React.Component {
       timezone: '',
       errors: {},
       isLoading: false,
-      isLogged: false,
+      redirect: false,
       invalid: false
     }
     this.onChange = this.onChange.bind(this);
@@ -28,7 +28,7 @@ class SignupForm extends React.Component {
     this.checkUserExists = this.checkUserExists.bind(this);
   }
   onChange(e) {
-    this.setState({[e.target.name]: e.target.value})
+    this.setState({ [e.target.name]: e.target.value })
   }
   isValid() {
     const { errors, isValid } = validateInput(this.state);
@@ -48,7 +48,7 @@ class SignupForm extends React.Component {
             type: 'success',
             text: 'You signed up successfully. Welcome!'
           });
-          this.setState({ isLogged: true });
+          this.setState({ redirect: true });
         }
         ,
         ({ data }) => this.setState({ errors: data, isLoading: false })
@@ -79,7 +79,7 @@ class SignupForm extends React.Component {
     );
     return (
       <div>
-        {this.state.isLogged ? <Redirect to="/" /> :
+        {this.state.redirect ? <Redirect to="/" /> :
           <form onSubmit={this.onSubmit}>
             <h1>Join our community!</h1>
 

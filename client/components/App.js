@@ -3,6 +3,7 @@ import { Match } from 'react-router';
 
 import NavigationBar from './NavigationBar';
 import SignupPage from './signup/SignupPage';
+import LoginPage from './login/LoginPage';
 import VisibleFlashMessageList from './flash/VisibleFlashMessageList';
 
 class App extends React.Component {
@@ -18,6 +19,7 @@ class App extends React.Component {
         />
         <Match exactly pattern="/" component={Greetings} />
         <Match pattern="/signup" component={SignupPage} />
+        <Match pattern="/login" component={LoginPage} />
       </div>
     );
   }
