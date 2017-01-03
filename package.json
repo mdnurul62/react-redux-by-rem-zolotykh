@@ -4,7 +4,7 @@
   "description": "Following the video tutorial React & Redux by Rem Zolotykh (https://www.youtube.com/user/MrRemchi)",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon --watch server --watch shared --exec babel-node -- server/index.js",
+    "start": "nodemon --watch server --watch shared --exec babel-node -- server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Johnny Zabala",
@@ -22,7 +22,7 @@
     "webpack-hot-middleware": "^2.13.2"
   },
   "dependencies": {
-    "axios": "^0.12.0",
+    "axios": "^0.15.3",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
     "bookshelf": "^0.10.2",

@@ -51,7 +51,7 @@ class SignupForm extends React.Component {
           this.setState({ redirect: true });
         }
         ,
-        ({ data }) => this.setState({ errors: data, isLoading: false })
+        (err) => this.setState({ errors: err.data, isLoading: false })
       );
     }
   }
