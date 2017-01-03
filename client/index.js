@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router';
 import { Provider } from 'react-redux';
-import jwt from 'jsonwebtoken';
+import jwtDecode from 'jwt-decode';
 import App from './components/App';
 import configureStore from './configureStore';
 import setAuthorizationToken from './utils/setAuthorizationToken';
@@ -12,7 +12,7 @@ const store = configureStore();
 
 if (localStorage.jwtToken) {
   setAuthorizationToken(localStorage.jwtToken);
-  store.dispatch(setCurrentUser(jwt.decode(localStorage.jwtToken)));
+  store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)));
 }
 
 render(
