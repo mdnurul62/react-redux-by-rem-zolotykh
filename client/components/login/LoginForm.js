@@ -43,10 +43,10 @@ class LoginForm extends React.Component {
     this.setState({[e.target.name]: e.target.value})
   }
   render () {
-    const { errors, identifier, password, isLoading } = this.state;
+    const { errors, identifier, password, isLoading, redirect } = this.state;
     return (
       <div>
-        {this.state.redirect ? <Redirect to="/" /> :
+        {redirect ? <Redirect to="/" /> :
           <form onSubmit={this.onSubmit}>
             <h1>Login</h1>
 

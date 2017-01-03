@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
-import { userSignupRequest, isUserExists } from '../../actions/signupActions';
+import { userSignupRequest, isUserExists } from '../../actions/signup';
 import { addFlashMessage } from '../../actions/flashMessages';
 import timezones from '../../data/timezones';
 import TextFieldGroup from '../common/TextFieldGroup';
