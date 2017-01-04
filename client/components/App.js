@@ -2,10 +2,12 @@ import React from 'react';
 import { Match } from 'react-router';
 
 import NavigationBar from './NavigationBar';
-import SignupPage from './signup/SignupPage';
-import LoginPage from './login/LoginPage';
+import SignupPage from './auth/SignupPage';
+import LoginPage from './auth/LoginPage';
 import EventPage from './events/EventPage';
 import VisibleFlashMessageList from './flash/VisibleFlashMessageList';
+
+import requireAuth from '../utils/requireAuth';
 
 class App extends React.Component {
   render() {
@@ -21,7 +23,7 @@ class App extends React.Component {
         <Match exactly pattern="/" component={Greetings} />
         <Match pattern="/signup" component={SignupPage} />
         <Match pattern="/login" component={LoginPage} />
-        <Match pattern="/new-event" component={EventPage} />
+        <Match pattern="/new-event" component={requireAuth(EventPage)} />
       </div>
     );
   }
