@@ -6,7 +6,7 @@ import { userSignupRequest, isUserExists } from '../../actions/signup';
 import { addFlashMessage } from '../../actions/flashMessages';
 import timezones from '../../data/timezones';
 import TextFieldGroup from '../common/TextFieldGroup';
-import validateInput from '../../../shared/validations/signup';
+import validateInput from '../../shared/validations/signup';
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -141,9 +141,9 @@ class SignupForm extends React.Component {
 }
 
 SignupForm.propTypes = {
-  userSignupRequest: React.PropTypes.func.isRequired,
-  addFlashMessage: React.PropTypes.func.isRequired,
-  isUserExists: React.PropTypes.func.isRequired
+  userSignupRequest: PropTypes.func.isRequired,
+  addFlashMessage: PropTypes.func.isRequired,
+  isUserExists: PropTypes.func.isRequired
 }
 
 export default connect(null,

@@ -9,6 +9,10 @@ import VisibleFlashMessageList from './flash/VisibleFlashMessageList';
 
 import requireAuth from '../utils/requireAuth';
 
+const Greetings = () => (
+  <h1>Hello from greetings!</h1>
+);
+
 class App extends React.Component {
   render() {
     return (
@@ -28,9 +32,5 @@ class App extends React.Component {
     );
   }
 }
-
-const Greetings = () => (
-  <h1>Hello from greetings!</h1>
-);
 
 export default App;

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import TextFieldGroup from '../common/TextFieldGroup';
-import validateInput from '../../../shared/validations/login';
+import validateInput from '../../shared/validations/login';
 import { login } from '../../actions/auth';
 
 class LoginForm extends React.Component {
@@ -42,7 +42,7 @@ class LoginForm extends React.Component {
   onChange(e) {
     this.setState({[e.target.name]: e.target.value})
   }
-  render () {
+  render () {    
     const { errors, identifier, password, isLoading, redirect } = this.state;
     return (
       <div>

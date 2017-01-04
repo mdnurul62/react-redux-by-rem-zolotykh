@@ -1,7 +1,7 @@
 import express from 'express';
 import bcrypt from 'bcrypt-nodejs';
 import isEmpty from 'lodash/isEmpty';
-import commonValidations from '../../shared/validations/signup';
+import commonValidations from '../shared/validations/signup';
 import User from '../models/user';
 
 let router = express.Router();

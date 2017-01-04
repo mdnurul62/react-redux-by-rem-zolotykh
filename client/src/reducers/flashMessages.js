@@ -11,7 +11,8 @@ const flashMessages = (state = {}, action = {}) => {
           text: action.message.text
         }
       }
-    case REMOVE_FLASH_MESSAGE:
+    case REMOVE_FLASH_MESSAGE:      
+      // eslint-disable-next-line
       const { [action.id]:message, ...newState } = state;
       return newState;
     default:
